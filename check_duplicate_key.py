@@ -8,7 +8,7 @@ def check_duplicate(file):
             f.read(),
             password=None
         )
-        print(private_key)
+        print(private_key.private_bytes())
     return
 
 if __name__ == "__main__":

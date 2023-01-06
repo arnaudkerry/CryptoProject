@@ -1,6 +1,7 @@
 from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.primitives.serialization import Encoding, PrivateFormat, NoEncryption
 import sys
+import os
 
 def gen_key(bits: int = 512):
     private_key = rsa.generate_private_key(
@@ -10,6 +11,8 @@ def gen_key(bits: int = 512):
     return private_key.private_bytes(encoding=Encoding.PEM,format=PrivateFormat.TraditionalOpenSSL,encryption_algorithm=NoEncryption())
 
 def generate(nb, bits = 512):
+    if os.path.exists("keyfile.txt"):
+        os.remove("keyfile.txt")
     f = open("keyfile.txt", "ab+")
     for i in range(int(nb)):
         f.write(gen_key(bits))
