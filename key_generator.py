@@ -1,13 +1,13 @@
-from OpenSSL.crypto import PKey
-from OpenSSL.crypto import TYPE_RSA
-from OpenSSL.crypto import dump_publickey
-from OpenSSL.crypto import FILETYPE_PEM
+from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.hazmat.primitives.serialization import Encoding, PrivateFormat, NoEncryption
 import sys
 
 def gen_key(bits: int = 512):
-    key = PKey()
-    key.generate_key(TYPE_RSA,bits)
-    return dump_publickey(FILETYPE_PEM,key)
+    private_key = rsa.generate_private_key(
+        public_exponent=65537,
+        key_size=bits
+    )
+    return private_key.private_bytes(encoding=Encoding.PEM,format=PrivateFormat.TraditionalOpenSSL,encryption_algorithm=NoEncryption())
 
 def generate(nb, bits = 512):
     f = open("keyfile.txt", "ab+")
