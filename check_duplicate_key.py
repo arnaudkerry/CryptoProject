@@ -3,11 +3,11 @@ import sys
 import itertools
 import threading
 import time
+import difflib
 
 def check_duplicate(file):
     f = open(file, "rb")
-    infos = f.readline().decode("utf-8").split()
-    nbKey = int(infos[0])
+    f.readline().decode("utf-8").split()
     keys = f.read().split(b"-----END RSA PRIVATE KEY-----")
     for a,b in itertools.combinations(keys, 2):
         threading.Thread(target=compare,args=(a,b)).start()
