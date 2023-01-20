@@ -3,6 +3,7 @@ import sys
 import time
 
 def gen(nb, bits = 512):
+    subprocess.call(["rm -rf keys"], shell=True)
     subprocess.call(["bash key_gen.sh %s %s" % (nb,bits)], shell=True)
         
 
