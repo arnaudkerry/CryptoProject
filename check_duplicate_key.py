@@ -7,6 +7,7 @@ import time
 def getKeys(folder):
     keys = []
     for file in os.listdir(folder):
+        print(file)
         key = open(folder+"/"+file,"rb").read()
         keys.append(key)
         

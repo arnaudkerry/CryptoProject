@@ -15,12 +15,12 @@ fi
 rm -rf keys
 mkdir keys
 for i in $(seq 1 $1)
-do {
+do
 	filetmp='keys/key'$i'.key.tmp'
 	file='keys/key'$i'.key'
 	openssl genrsa $2 > $filetmp
 	sed '/^-----BEGIN PRIVATE KEY-----/d;/^-----END PRIVATE KEY-----/d' $filetmp > $file 2>/dev/null
 	rm $filetmp
-}& done
+done
 wait
 echo "TIME : $SECONDS seconds"
