@@ -1,33 +1,30 @@
 import subprocess
 import sys
-import itertools
-import threading
-import time
 import difflib
+import os
+import time
 
-def check_duplicate(file):
-    f = open(file, "rb")
-    f.readline().decode("utf-8").split()
-    keys = f.read().split(b"-----END RSA PRIVATE KEY-----")
-    for a,b in itertools.combinations(keys, 2):
-        threading.Thread(target=compare,args=(a,b)).start()
+def getKeys(folder):
+    keys = []
+    for file in os.listdir(folder):
+        key = open(folder+"/"+file,"rb").read()
+        keys.append(key)
+        
+    return keys
 
-def compare(a,b):
-    if a == b:
-        print("Found ! : %s" % a)
-        return -1
-    
-
-def format_Text(file):
-    subprocess.call(["sed '/^-----BEGIN RSA PRIVATE KEY-----/d' %s > out.txt" % file], shell=True)
-    start = time.time()    
-    check_duplicate("out.txt")
-    print("--- %s seconds ---" % (time.time() - start))
-    subprocess.call(["rm out.txt"], shell=True)
+def check_duplicate(folder):
+    keys = getKeys(folder)
+    unique = set(keys)
+    if len(keys) == len(unique):
+        print("No duplicate")
+    else:
+        print("There is : %s duplicate" % len(keys) - len-unique)
 
 
 if __name__ == "__main__":
     if(len(sys.argv) == 2):
-        format_Text(sys.argv[1])
+        start = time.time()
+        check_duplicate(sys.argv[1])
+        print("--- %s seconds ---" % (time.time() - start))
     else:
-        print("Usage : python3 check_duplicate_key.py FILE")
+        print("Usage : python3 check_duplicate_key.py FOLDER")
