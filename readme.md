@@ -9,13 +9,27 @@
 ## Affichage des chaînes de caractère communes
     - python common_substring.py keys
 
-## Temps d'exécution sur ancienne VM (sha256)
- - 2000 clés
- - 4000 clés
- - 8000 clés
- Extrapolation : 
+## Temps d'exécution sur ancienne VM (rsa256)
+ - 2000 clés : 10 secondes
+ - 4000 clés 25 secondes
+ - 8000 clés : 46 secondes
+ Extrapolation : Pour 1 millions de clés -> 6000 secondes
+
+ ## Temps d'exécution sur ancienne VM (rsa512)
+ - 2000 clés : 10 secondes
+ - 4000 clés 27 secondes
+ - 8000 clés : 47 secondes
+ Extrapolation : Pour 1 millions de clés -> 6000 secondes
+
+ ## Temps d'exécution sur ancienne VM (rsa1024)
+ - 2000 clés : 40 secondes
+ - 4000 clés 80 secondes
+ - 8000 clés : 170 secondes
+ Extrapolation : Pour 1 millions de
+ clés -> 22 100 secondes
 
  ## Présence de doublon
-  
+ - Jamais eu de doublons durant les tests (taille max 400000)
 
-## 
+## Plus longue sous chaîne commune
+ - Environ 27 caractères
